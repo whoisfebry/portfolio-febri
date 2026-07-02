@@ -10,6 +10,9 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
   title: "Portfolio Febri",
   description: "Personal Portfolio",
+  icons: {
+    icon: "/images/logoMFH.png",
+  },
 };
 
 export default function RootLayout({
