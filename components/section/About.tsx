@@ -121,7 +121,7 @@ export default function About({ language }: AboutProps) {
                         <a
                             href="/CV MUHAMMAD FEBRI HERMANSYAH.pdf"
                             download="CV MUHAMMAD FEBRI HERMANSYAH.pdf"
-                            className="inline-flex items-center justify-center gap-2 rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-blue-700"
+                            className="inline-flex w-full lg:w-auto items-center justify-center gap-2 rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-blue-700"
                         >
                             <Download size={18} />
                             {t.about.downloadCV}
