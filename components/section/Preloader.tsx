@@ -11,7 +11,7 @@ export default function Preloader() {
         const handleLoad = () => {
             setTimeout(() => {
                 setLoading(false);
-            }, 1000);
+            }, 1500);
         };
 
         if (document.readyState === "complete") {
