@@ -5,8 +5,11 @@
     --foreground: #111827;
 }
 
+* {
+    outline: 1px solid transparent;
+}
+
 html {
-    overflow-x: hidden;
     scroll-behavior: smooth;
 }
 
