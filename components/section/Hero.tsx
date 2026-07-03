@@ -60,7 +60,7 @@ export default function Hero({ language }: HeroProps) {
     return (
         <section
             id="home"
-            className="relative flex min-h-screen items-center bg-white pt-24 sm:pt-28"
+            className="relative flex min-h-dvh items-center bg-white pt-24 sm:pt-28"
         >
             <div className="mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-12 px-4 lg:grid-cols-2 lg:gap-16">
                 {/* LEFT */}

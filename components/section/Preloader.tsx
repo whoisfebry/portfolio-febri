@@ -8,11 +8,19 @@ export default function Preloader() {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const timer = setTimeout(() => {
-            setLoading(false);
-        }, 1500);
+        const handleLoad = () => {
+            setTimeout(() => {
+                setLoading(false);
+            }, 1000);
+        };
 
-        return () => clearTimeout(timer);
+        if (document.readyState === "complete") {
+            handleLoad();
+        } else {
+            window.addEventListener("load", handleLoad);
+        }
+
+        return () => window.removeEventListener("load", handleLoad);
     }, []);
 
     return (
