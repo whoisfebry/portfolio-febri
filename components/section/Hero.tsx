@@ -65,7 +65,7 @@ export default function Hero({ language }: HeroProps) {
             <div className="mx-auto grid w-full max-w-6xl grid-cols-1 items-center gap-12 px-4 lg:grid-cols-2 lg:gap-16">
                 {/* LEFT */}
                 <motion.div
-                    initial={{ opacity: 0, x: 0 }}
+                    initial={{ opacity: 0, x: -40 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.8 }}
                     className="order-2 text-center lg:order-1 lg:text-left"
