@@ -179,6 +179,71 @@ const projects: Project[] = [
     },
     {
         title: {
+            id: "Mobile Flutter TokoKita",
+            en: "Mobile Flutter TokoKita",
+        },
+        category: "programmer",
+        images: [
+            "images/projects/tokokita/tokokita1.webp",
+            "images/projects/tokokita/tokokita2.webp",
+            "images/projects/tokokita/tokokita3.webp",
+            "images/projects/tokokita/tokokita4.webp",
+            "images/projects/tokokita/tokokita5.webp",
+        ],
+        description: {
+            id: "Aplikasi mobile e-commerce berbasis Flutter dengan fitur autentikasi pengguna, katalog produk, keranjang belanja, profil pengguna, serta integrasi API menggunakan MySQL dan Postman.",
+            en: "Flutter-based mobile e-commerce application featuring user authentication, product catalog, shopping cart, user profile, and API integration with MySQL and Postman.",
+        },
+        technologies: [
+            "Flutter",
+            "MySQL",
+            "Postman",
+        ],
+    },
+    {
+        title: {
+            id: "Website TodoApp",
+            en: "Website TodoApp",
+        },
+        category: "programmer",
+        images: [
+            "images/projects/todoapp/todo1.png",
+            "images/projects/todoapp/todo2.png",
+            "images/projects/todoapp/todo3.png",
+        ],
+        description: {
+            id: "Website manajemen tugas berbasis Next.js dengan fitur autentikasi pengguna, pengelolaan tugas, filter status, dashboard ringkasan, dan antarmuka modern yang responsif.",
+            en: "Next.js-based task management website featuring user authentication, task management, status filtering, dashboard summary, and a modern responsive interface.",
+        },
+        technologies: [
+            "Next.js",
+        ],
+    },
+    {
+        title: {
+            id: "Mobile Flutter MedQuick",
+            en: "Mobile Flutter MedQuick",
+        },
+        category: "programmer",
+        images: [
+            "images/projects/medquick/MedQuick1.webp",
+            "images/projects/medquick/MedQuick2.webp",
+            "images/projects/medquick/MedQuick3.webp",
+            "images/projects/medquick/MedQuick4.webp",
+            "images/projects/medquick/MedQuick5.webp",
+        ],
+        description: {
+            id: "Aplikasi mobile layanan kesehatan berbasis Flutter yang menyediakan fitur pendaftaran pasien, konsultasi dokter, riwayat pemeriksaan, profil pengguna, serta integrasi API menggunakan MySQL dan Postman.",
+            en: "Flutter-based healthcare mobile application featuring patient registration, doctor consultation, medical history, user profile, and API integration with MySQL and Postman.",
+        },
+        technologies: [
+            "Flutter",
+            "MySQL",
+            "Postman",
+        ],
+    },
+    {
+        title: {
             id: "Genone Landing Page",
             en: "Genone Landing Page",
         },

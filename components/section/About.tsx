@@ -94,7 +94,7 @@ export default function About({ language }: AboutProps) {
                         <div className="px-1">
                             <h3 className="text-3xl font-extrabold text-blue-600 sm:text-4xl">
                                 <CountUp
-                                    end={12}
+                                    end={15}
                                     duration={2}
                                 />
                                 +

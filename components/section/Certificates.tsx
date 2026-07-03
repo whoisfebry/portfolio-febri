@@ -132,15 +132,15 @@ export default function Certificates({
                         <div className="relative inline-block">
                             <button
                                 onClick={() => setSelectedCertificate(null)}
-                                className="absolute -right-4 -top-4 z-50 flex h-10 w-10 items-center justify-center rounded-full bg-white shadow-xl transition hover:scale-110 hover:bg-blue-600 hover:text-white"
+                                className="absolute -right-2 -top-2 z-50 flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-white shadow-lg transition hover:scale-110 hover:bg-blue-600 hover:text-white"
                             >
-                                <X size={20} />
+                                <X size={16} />
                             </button>
-                            <div className="rounded-3xl bg-[#DAE3F1] p-3 shadow-2xl sm:p-5">
+                            <div className="rounded-2xl bg-[#DAE3F1] p-2 sm:p-3 shadow-xl">
                                 <img
-                                src={selectedCertificate.image}
-                                alt={selectedCertificate.title}
-                                className="block max-h-[70vh] max-w-[90vw] rounded-2xl object-contain sm:max-h-[75vh] sm:max-w-[80vw]"
+                                    src={selectedCertificate.image}
+                                    alt={selectedCertificate.title}
+                                    className="block max-h-[55vh] max-w-[82vw] rounded-xl object-contain sm:max-h-[60vh] sm:max-w-[65vw] lg:max-h-[65vh] lg:max-w-[55vw]"
                                 />
                             </div>
                         </div>

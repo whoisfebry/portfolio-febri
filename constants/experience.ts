@@ -13,6 +13,11 @@ const experience = [
             ID: "Jakarta Selatan, Indonesia",
             EN: "South Jakarta, Indonesia",
         },
+        photos: [
+            "/images/tdm/tdm1.webp",
+            "/images/tdm/tdm2.webp",
+            "/images/tdm/tdm3.webp",
+        ],
         jobdesk: {
             ID: [
                 "Mengolah dan menganalisis 10.000+ data transaksi penjualan menggunakan Power BI, Tableau, dan Python untuk mendukung kebutuhan pelaporan dan analisis bisnis.",
@@ -46,6 +51,11 @@ const experience = [
             ID: "Jakarta Selatan, Indonesia",
             EN: "South Jakarta, Indonesia",
         },
+        photos: [
+            "/images/kinala/kinala1.webp",
+            "/images/kinala/kinala2.webp",
+            "/images/kinala/kinala3.webp",
+        ],
         jobdesk: {
             ID: [
                 "Merancang dan mengembangkan fitur pemindaian barcode berbasis C# yang terintegrasi dengan sistem web untuk mengotomatisasi proses pencatatan kehadiran.",
@@ -53,7 +63,7 @@ const experience = [
                 "Mengintegrasikan database absensi untuk mendukung pengelolaan data secara real-time serta memastikan sinkronisasi data antar halaman dan pengguna.",
                 "Mengimplementasikan logika sistem dan fitur pendukung guna memastikan proses pencatatan, penyimpanan, dan pengelolaan data absensi berjalan dengan baik.",
                 "Melakukan pengujian, debugging, dan perbaikan sistem untuk mengurangi kesalahan serta meningkatkan stabilitas dan efisiensi proses absensi.",
-                "Berkolaborasi dengan tim pengembang serta mendokumentasikan proses pengembangan dan konfigurasi sistem untuk mendukung pemeliharaan dan pengembangan lanjutan.",
+                "Berkolaborasi dengan tim pengembang serta mendokumentasikan proses pengembangan dan konfigurasi sistem untuk pemeliharaan dan pengembangan lanjutan.",
             ],
             EN: [
                 "Designed and developed a C#-based barcode scanning feature integrated with a web system to automate attendance recording.",
@@ -61,7 +71,7 @@ const experience = [
                 "Integrated the attendance database to support real-time data management and synchronization across pages and users.",
                 "Implemented system logic and supporting features to ensure reliable attendance recording, storage, and data management.",
                 "Performed testing, debugging, and system improvements to reduce errors while enhancing system stability and efficiency.",
-                "Collaborated with the development team and documented system development and configuration to support future maintenance and enhancements.",
+                "Collaborated with the development team and documented system development and configuration to future maintenance and enhancements.",
             ],
         },
     },

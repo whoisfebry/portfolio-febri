@@ -1,10 +1,15 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+import { useState } from "react";
 import {
     CalendarDays,
     MapPin,
     Building2,
+    ImageIcon,
+    X,
+    ChevronLeft,
+    ChevronRight,
 } from "lucide-react";
 
 import experiences from "@/constants/experience";
@@ -21,6 +26,27 @@ export default function Experience({
 }: ExperienceProps) {
 
     const t = language === "ID" ? id : en;
+    const [selectedExperience, setSelectedExperience] = useState<any>(null);
+    const [currentImage, setCurrentImage] = useState(0);
+    const nextImage = () => {
+        if (!selectedExperience) return;
+
+        setCurrentImage((prev) =>
+            prev === selectedExperience.photos.length - 1
+                ? 0
+                : prev + 1
+        );
+    };
+
+    const prevImage = () => {
+        if (!selectedExperience) return;
+
+        setCurrentImage((prev) =>
+            prev === 0
+                ? selectedExperience.photos.length - 1
+                : prev - 1
+        );
+    };
     return (
         <section
             id="experience"
@@ -141,7 +167,7 @@ export default function Experience({
                                                     className="flex items-start gap-3"
                                                 >
                                                     <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-blue-600" />
-                                                    <p className="text-justify text-sm leading-7 text-gray-600 sm:text-base">
+                                                    <p className="text-left text-sm leading-7 text-gray-600 sm:text-base">
                                                         {job}
                                                     </p>
                                                 </div>
@@ -156,7 +182,7 @@ export default function Experience({
                                                     className="flex items-start gap-3"
                                                 >
                                                     <span className="mt-2 h-2 w-2 shrink-0 rounded-full bg-blue-600" />
-                                                    <p className="text-justify text-sm leading-7 text-gray-600 sm:text-base">
+                                                    <p className="text-left text-sm leading-7 text-gray-600 sm:text-base">
                                                         {job}
                                                     </p>
                                                 </div>
@@ -164,10 +190,143 @@ export default function Experience({
                                         </div>
                                     </div>
                                 </div>
+                                <div className="mt-8 flex justify-start">
+                                    <button
+                                        onClick={() => {
+                                            setSelectedExperience(item);
+                                            setCurrentImage(0);
+                                        }}
+                                        className="inline-flex items-center gap-2 rounded-xl border border-blue-200 bg-blue-50 px-4 py-2 text-sm font-semibold text-blue-600 transition-all duration-300 hover:border-blue-600 hover:bg-blue-600 hover:text-white"
+                                    >
+                                        <ImageIcon size={18} />
+
+                                        {language === "ID"
+                                            ? "Lihat Dokumentasi"
+                                            : "View Gallery"}
+                                    </button>
+                                </div>
                             </motion.div>
                         );
                     })}
                 </div>
+
+                {/* Modal */}
+                <AnimatePresence>
+                    {selectedExperience && (
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            onClick={() => setSelectedExperience(null)}
+                            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70 p-3 sm:p-5 backdrop-blur-sm"
+                        >
+                            <motion.div
+                                initial={{
+                                    opacity: 0,
+                                    scale: 0.96,
+                                    y: 20,
+                                }}
+                                animate={{
+                                    opacity: 1,
+                                    scale: 1,
+                                    y: 0,
+                                }}
+                                exit={{
+                                    opacity: 0,
+                                    scale: 0.96,
+                                    y: 20,
+                                }}
+                                transition={{
+                                    duration: 0.25,
+                                }}
+                                onClick={(e) => e.stopPropagation()}
+                                className="relative w-full max-w-[95vw] max-h-[90vh] overflow-y-auto rounded-2xl border border-blue-300 bg-[#DDE6F5] shadow-2xl ring-2 ring-blue-500/50 sm:max-w-[650px] lg:max-w-[760px]"
+                            >
+                                {/* Header */}
+                                <div className="flex items-center justify-between border-b border-gray-200 px-4 py-4 sm:px-6 sm:py-5">
+                                    <div>
+                                        <h2 className="text-sm font-bold leading-tight text-gray-900 break-words sm:text-2xl">
+                                            {selectedExperience.company}
+                                        </h2>
+                                        <p className="mt-1 text-sm text-gray-600 sm:text-base">
+                                            {selectedExperience.position[language]}
+                                        </p>
+                                    </div>
+                                    <button
+                                        onClick={() => setSelectedExperience(null)}
+                                        className="flex h-9 w-9 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-700 shadow-sm transition-all duration-300 hover:scale-105 hover:border-blue-600 hover:bg-blue-600 hover:text-white sm:h-10 sm:w-10"
+                                    >
+                                        <X size={18} />
+                                    </button>
+                                </div>
+
+                                {/* Image */}
+                                <div className="px-4 pt-5 pb-8 sm:px-6 sm:pt-6 sm:pb-8">
+                                    <div className="relative flex justify-center">
+                                        <motion.img
+                                            key={currentImage}
+                                            initial={{
+                                                opacity: 0,
+                                                x: 15,
+                                            }}
+                                            animate={{
+                                                opacity: 1,
+                                                x: 0,
+                                            }}
+                                            transition={{
+                                                duration: 0.25,
+                                            }}
+                                            src={selectedExperience.photos[currentImage]}
+                                            alt=""
+                                            className="max-h-[180px] w-auto rounded-xl object-contain sm:max-h-[240px] lg:max-h-[260px]"
+                                        />
+                                        {selectedExperience.photos.length > 1 && (
+                                            <>
+                                                <button
+                                                    onClick={prevImage}
+                                                    className="absolute left-1 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-700 shadow-md transition-all duration-300 hover:border-blue-600 hover:bg-blue-600 hover:text-white sm:left-0 sm:h-10 sm:w-10"
+                                                >
+                                                    <ChevronLeft size={18} />
+                                                </button>
+                                                <button
+                                                    onClick={nextImage}
+                                                    className="absolute right-1 top-1/2 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-700 shadow-md transition-all duration-300 hover:border-blue-600 hover:bg-blue-600 hover:text-white sm:right-0 sm:h-10 sm:w-10"
+                                                >
+                                                    <ChevronRight size={18} />
+                                                </button>
+                                            </>
+                                        )}
+                                    </div>
+
+                                    {/* Thumbnail */}
+                                    {selectedExperience.photos.length > 1 && (
+                                        <div className="mt-5 flex justify-center gap-3 px-4">
+                                            {selectedExperience.photos.map(
+                                                (photo: string, index: number) => (
+                                                    <button
+                                                        key={index}
+                                                        onClick={() => setCurrentImage(index)}
+                                                        className={`overflow-hidden rounded-xl border-2 transition-all duration-300 ${
+                                                            currentImage === index
+                                                                ? "border-blue-600 shadow-lg"
+                                                                : "border-transparent opacity-70 hover:opacity-100"
+                                                        }`}
+                                                    >
+                                                        <img
+                                                            src={photo}
+                                                            alt={`Thumbnail ${index + 1}`}
+                                                            className="h-12 w-16 object-cover sm:h-16 sm:w-24"
+                                                        />
+                                                    </button>
+                                                )
+                                            )}
+                                        </div>
+                                    )}
+                                </div>
+                            </motion.div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
             </div>
         </section>
     );
