@@ -41,8 +41,8 @@ export default function Navbar({
     }, []);
 
     return (
-        <header className="fixed inset-x-0 top-6 z-50 px-4">
-            <div className="mx-auto w-full max-w-6xl">
+        <header className="fixed top-6 left-1/2 z-50 w-full -translate-x-1/2 px-4">
+            <div className="mx-auto max-w-6xl">
                 {/* Navbar */}
                 <nav className="flex h-[62px] items-center justify-between rounded-full border border-gray-200 bg-white px-6 shadow-lg">
                     {/* Logo */}
