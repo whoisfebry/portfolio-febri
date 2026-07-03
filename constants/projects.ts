@@ -224,7 +224,7 @@ const projects: Project[] = [
             id: "Mobile Flutter MedQuick",
             en: "Mobile Flutter MedQuick",
         },
-        category: "programmer",
+        category: "data-analyst",
         images: [
             "images/projects/medquick/MedQuick1.webp",
             "images/projects/medquick/MedQuick2.webp",
