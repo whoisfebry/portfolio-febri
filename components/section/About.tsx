@@ -23,41 +23,19 @@ export default function About({ language }: AboutProps) {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    className="relative w-full max-w-[280px] shrink-0 sm:max-w-sm"
-                    >
-                    {/* Background Accent */}
-                    <motion.div
-                        initial={{
-                            x: 20,
-                            y: 20,
-                            rotate: -3,
-                        }}
-                        whileHover={{
-                            x: 20,
-                            y: 10,
-                            rotate: -3,
-                            scale: 1.02,
-                        }}
-                        transition={{
-                            duration: 0.35,
-                        }}
-                        className="absolute inset-0 rounded-[32px] bg-blue-500/10"
-                    />
-                    {/* Frame */}
-                    <motion.div
-                        whileHover={{
-                            y: -10,
-                            boxShadow: "0px 25px 60px rgba(37,99,235,0.18)",
-                        }}
-                        transition={{ duration: 0.35 }}
-                        className="group relative cursor-pointer overflow-hidden rounded-[32px] border border-gray-200 bg-white"
-                        >
-                        <img
-                            src="/images/hero2.webp"
-                            alt="Muhammad Febri Hermansyah"
-                            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
-                        />
-                    </motion.div>
+                    className="flex w-full justify-center lg:w-[380px]"
+                >
+                    <div className="flip-card">
+                        <div className="flip-inner">
+                            <div className="flip-front">
+                                <img src="/images/hero2.webp" alt="" />
+                            </div>
+
+                            <div className="flip-back">
+                                <img src="/images/hero3.webp" alt="" />
+                            </div>
+                        </div>
+                    </div>
                 </motion.div>
                 {/* CONTENT */}
                 <motion.div
