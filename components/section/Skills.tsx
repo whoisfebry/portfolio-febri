@@ -7,16 +7,16 @@ import { Language } from "@/types";
 
 const topRowSkills = [
   {
-    name: "Microsoft Excel",
-    img: "https://img.icons8.com/color/96/microsoft-excel-2019.png",
+  name: "Microsoft Excel",
+  img: "https://cdn.jsdelivr.net/gh/sempostma/office365-icons@master/svg/excel.svg",
   },
   {
     name: "Microsoft Word",
-    img: "https://img.icons8.com/color/96/microsoft-word-2019.png",
+    img: "https://cdn.jsdelivr.net/gh/sempostma/office365-icons@master/svg/word.svg",
   },
   {
     name: "Microsoft PowerPoint",
-    img: "https://img.icons8.com/color/96/microsoft-powerpoint-2019.png",
+    img: "https://cdn.jsdelivr.net/gh/sempostma/office365-icons@master/svg/powerpoint.svg",
   },
   {
     name: "MySQL",
@@ -27,8 +27,8 @@ const topRowSkills = [
     img: "https://www.apachefriends.org/images/xampp-logo-ac950edf.svg",
   },
   {
-    name: "Power BI",
-    img: "https://img.icons8.com/color/96/power-bi.png",
+  name: "Power BI",
+  img: "https://cdn.jsdelivr.net/gh/microsoft/PowerBI-Icons@main/SVG/Power-BI.svg",
   },
   {
     name: "Tableau",
