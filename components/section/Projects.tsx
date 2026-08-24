@@ -350,10 +350,10 @@ export default function Projects({
                                 <div className="mb-5 flex flex-wrap gap-3">
                                     {selectedProject.technologies.map((tech) => {
                                         const icons: Record<string, string> = {
-                                            "Power BI": "https://img.icons8.com/color/96/power-bi.png",
-                                            "Microsoft Excel": "https://img.icons8.com/color/96/microsoft-excel-2019.png",
-                                            "Microsoft Word": "https://img.icons8.com/color/96/microsoft-word-2019.png",
-                                            "Microsoft PowerPoint": "https://img.icons8.com/color/96/microsoft-powerpoint-2019.png",
+                                            "Power BI": "https://cdn.jsdelivr.net/gh/microsoft/PowerBI-Icons@main/SVG/Power-BI.svg",
+                                            "Microsoft Excel": "https://cdn.jsdelivr.net/gh/sempostma/office365-icons@master/svg/excel.svg",
+                                            "Microsoft Word": "https://cdn.jsdelivr.net/gh/sempostma/office365-icons@master/svg/word.svg",
+                                            "Microsoft PowerPoint": "https://cdn.jsdelivr.net/gh/sempostma/office365-icons@master/svg/powerpoint.svg",
                                             "Tableau": "https://cdn.worldvectorlogo.com/logos/tableau-software.svg",
                                             "MySQL": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg",
                                             "Laravel": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/laravel/laravel-original.svg",
