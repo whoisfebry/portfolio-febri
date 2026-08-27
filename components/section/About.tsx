@@ -107,7 +107,8 @@ export default function About({ language }: AboutProps) {
                     <div className="mt-6 flex w-full justify-center lg:justify-start">
                         <a
                             href="/CV MUHAMMAD FEBRI HERMANSYAH.pdf"
-                            download="CV MUHAMMAD FEBRI HERMANSYAH.pdf"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="inline-flex w-full lg:w-auto items-center justify-center gap-2 rounded-full bg-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-blue-700"
                         >
                             <Download size={18} />
