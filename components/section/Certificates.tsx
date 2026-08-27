@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
-import { ExternalLink, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ExternalLink, X, ChevronLeft, ChevronRight} from "lucide-react";
 import certificates from "@/constants/certificates";
 import id from "@/locales/id";
 import en from "@/locales/en";
@@ -21,18 +21,121 @@ export default function Certificates({
         (typeof certificates)[number] | null
     >(null);
 
+    const [activeIndex, setActiveIndex] = useState(0);
+    const [direction, setDirection] = useState(1);
+    const total = certificates.length;
+    const getIndex = (offset: number) => {
+        if (total === 0) return 0;
+        return (
+            (activeIndex + offset + total) % total
+        );
+    };
+
+    const nextCertificate = () => {
+        if (total <= 1) return;
+        setDirection(1);
+        setActiveIndex(
+            (prev) => (prev + 1) % total
+        );
+    };
+
+    const previousCertificate = () => {
+        if (total <= 1) return;
+        setDirection(-1);
+        setActiveIndex(
+            (prev) =>
+                (prev - 1 + total) % total
+        );
+    };
+
+    const selectCertificate = (index: number) => {
+        if (index === activeIndex) return;
+        setDirection(
+            index > activeIndex ? 1 : -1
+        );
+        setActiveIndex(index);
+    };
+
+    const handleDragEnd = (
+        _: unknown,
+        info: {
+            offset: {
+                x: number;
+            };
+        }
+    ) => {
+        if (info.offset.x < -80) {
+            nextCertificate();
+        } else if (info.offset.x > 80) {
+            previousCertificate();
+        }
+    };
+
+    const getCardStyle = (offset: number) => {
+        const positions = {
+            "-2": {
+                x: "-105%",
+                scale: 0.72,
+                opacity: 0.35,
+                zIndex: 10,
+                rotate: -8,
+            },
+            "-1": {
+                x: "-58%",
+                scale: 0.84,
+                opacity: 0.65,
+                zIndex: 20,
+                rotate: -5,
+            },
+            "0": {
+                x: "0%",
+                scale: 1,
+                opacity: 1,
+                zIndex: 50,
+                rotate: 0,
+            },
+            "1": {
+                x: "58%",
+                scale: 0.84,
+                opacity: 0.65,
+                zIndex: 20,
+                rotate: 5,
+            },
+            "2": {
+                x: "105%",
+                scale: 0.72,
+                opacity: 0.35,
+                zIndex: 10,
+                rotate: 8,
+            },
+        };
+
+        return positions[
+            offset.toString() as keyof typeof positions
+        ];
+    };
+
     return (
         <section
             id="certificate"
-            className="scroll-mt-20 py-20"
+            className="relative z-0 isolate scroll-mt-20 overflow-hidden py-20"
         >
-            <div className="mx-auto max-w-6xl px-4">
-                {/* Heading */}
+            <div className="mx-auto max-w-7xl px-4">
                 <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
+                    initial={{
+                        opacity: 0,
+                        y: 30,
+                    }}
+                    whileInView={{
+                        opacity: 1,
+                        y: 0,
+                    }}
+                    viewport={{
+                        once: true,
+                    }}
+                    transition={{
+                        duration: 0.6,
+                    }}
                     className="text-center"
                 >
                     <span className="text-sm font-semibold uppercase tracking-[0.25em] text-blue-600">
@@ -49,68 +152,291 @@ export default function Certificates({
                         {t.certificate.description}
                     </p>
                 </motion.div>
-                {/* Cards */}
-                <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-                    {certificates.map((item, index) => (
+
+                <div className="relative mx-auto mt-16 hidden h-[500px] max-w-6xl items-center justify-center md:flex">
+                    <button
+                        type="button"
+                        onClick={previousCertificate}
+                        aria-label="Previous certificate"
+                        className="absolute left-4 z-[100] flex h-12 w-12 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-700 shadow-lg transition-all duration-300 hover:scale-110 hover:border-blue-500 hover:bg-blue-600 hover:text-white lg:left-10">
+                        <ChevronLeft size={22} />
+                    </button>
+                    <div className="relative flex h-full w-full items-center justify-center">
+                        {[-2, -1, 0, 1, 2].map(
+                            (offset) => {
+                                const index =
+                                    getIndex(offset);
+                                const certificate =
+                                    certificates[
+                                        index
+                                    ];
+                                const style =
+                                    getCardStyle(
+                                        offset
+                                    );
+                                return (
+                                    <motion.div
+                                        key={`${index}-${offset}`}
+                                        animate={{
+                                            x: style.x,
+                                            scale: style.scale,
+                                            opacity:
+                                                style.opacity,
+                                            rotate:
+                                                style.rotate,
+                                            zIndex:
+                                                style.zIndex,
+                                        }}
+                                        transition={{
+                                            duration: 0.55,
+                                            ease: [
+                                                0.22,
+                                                1,
+                                                0.36,
+                                                1,
+                                            ],
+                                        }}
+                                        onClick={() => {
+                                            if (
+                                                offset ===
+                                                0
+                                            ) {
+                                                setSelectedCertificate(
+                                                    certificate
+                                                );
+                                            } else {
+                                                selectCertificate(
+                                                    index
+                                                );
+                                            }
+                                        }}
+                                        className="absolute h-[410px] w-[290px] cursor-pointer rounded-3xl border border-gray-200 bg-white shadow-2xl transition-shadow hover:shadow-3xl">
+                                        <div className="p-4">
+                                            <div className="overflow-hidden rounded-2xl bg-gray-100">
+                                                <img
+                                                    src={
+                                                        certificate.image
+                                                    }
+                                                    alt={
+                                                        certificate.title
+                                                    }
+                                                    className="h-[230px] w-full object-cover object-top"/>
+                                            </div>
+                                        </div>
+                                        <div className="px-5 pb-5">
+                                            <span className="text-xs text-blue-600">
+                                                {
+                                                    certificate.issuer
+                                                }
+                                            </span>
+                                            <h3 className="mt-2 line-clamp-2 text-lg font-bold leading-snug text-gray-900">
+                                                {
+                                                    certificate.title
+                                                }
+                                            </h3>
+                                            <div className="mt-4 flex items-center justify-between">
+                                                <span className="text-xs text-gray-500">
+                                                    {
+                                                        certificate.year
+                                                    }
+                                                </span>
+                                                {offset ===
+                                                    0 && (
+                                                    <span className="flex items-center gap-1.5 rounded-full bg-blue-600 px-3 py-1.5 text-xs font-semibold text-white">
+                                                        {
+                                                            t
+                                                                .certificate
+                                                                .view
+                                                        }
+                                                        <ExternalLink
+                                                            size={
+                                                                13
+                                                            }
+                                                        />
+                                                    </span>
+                                                )}
+                                            </div>
+                                        </div>
+                                    </motion.div>
+                                );
+                            }
+                        )}
+                    </div>
+
+                    <button
+                        type="button"
+                        onClick={nextCertificate}
+                        aria-label="Next certificate"
+                        className="absolute right-4 z-[100] flex h-12 w-12 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-700 shadow-lg transition-all duration-300 hover:scale-110 hover:border-blue-500 hover:bg-blue-600 hover:text-white lg:right-10">
+                        <ChevronRight size={22} />
+                    </button>
+                </div>
+                <div className="relative mx-auto mt-12 flex h-[500px] w-full max-w-[360px] items-center justify-center md:hidden">
+                    {/* LEFT */}
+                    <button
+                        type="button"
+                        onClick={previousCertificate}
+                        aria-label="Previous certificate"
+                        className="absolute left-0 z-[100] flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-700 shadow-lg transition-all duration-300 hover:scale-110 hover:border-blue-500 hover:bg-blue-600 hover:text-white">
+                        <ChevronLeft size={19} />
+                    </button>
+                    {/* MOBILE CARD */}
+                    <AnimatePresence
+                        mode="popLayout"
+                        initial={false}
+                        custom={direction}
+                    >
                         <motion.div
-                            key={index}
-                            initial={{ opacity: 0, y: 40 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
+                            key={activeIndex}
+                            custom={direction}
+                            initial={{
+                                opacity: 0,
+                                x:
+                                    direction *
+                                    120,
+                                scale: 0.9,
+                            }}
+                            animate={{
+                                opacity: 1,
+                                x: 0,
+                                scale: 1,
+                            }}
+                            exit={{
+                                opacity: 0,
+                                x:
+                                    direction *
+                                    -120,
+                                scale: 0.9,
+                            }}
                             transition={{
-                                duration: 0.5,
-                                delay: index * 0.1,
+                                duration: 0.4,
                             }}
-                            whileHover={{
-                                y: -12,
-                                scale: 1.03,
+                            drag="x"
+                            dragConstraints={{
+                                left: 0,
+                                right: 0,
                             }}
-                            whileTap={{
-                                scale: 0.98,
-                            }}
-                            onClick={() => setSelectedCertificate(item)}
-                            className="group cursor-pointer rounded-3xl border border-gray-200 bg-white shadow-md transition-all duration-500 hover:border-blue-500"
+                            dragElastic={0.2}
+                            onDragEnd={
+                                handleDragEnd
+                            }
+                            onClick={() =>
+                                setSelectedCertificate(
+                                    certificates[
+                                        activeIndex
+                                    ]
+                                )
+                            }
+                            className="absolute h-[430px] w-[280px] cursor-pointer rounded-3xl border border-gray-200 bg-white p-4 shadow-2xl"
                         >
-                            {/* Thumbnail */}
-                            <div className="p-4 pb-0">
-                                <div className="overflow-hidden rounded-2xl bg-gray-100 shadow-sm">
-                                    <img
-                                        src={item.image}
-                                        alt={item.title}
-                                        className="h-52 sm:h-56 lg:h-60 w-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
-                                    />
-                                </div>
+                            <div className="overflow-hidden rounded-2xl bg-gray-100">
+                                <img
+                                    src={
+                                        certificates[
+                                            activeIndex
+                                        ].image
+                                    }
+                                    alt={
+                                        certificates[
+                                            activeIndex
+                                        ].title
+                                    }
+                                    className="h-[245px]] w-full object-cover object-top"
+                                />
                             </div>
-                            {/* Content */}
-                            <div className="px-5 pb-5 pt-4 sm:px-6 sm:pb-6 sm:pt-5">
-                                <span className="text-sm font-medium text-blue-600">
-                                    {item.issuer}
+                            <div className="px-1 pt-4">
+                                <span className="text-xs font-semibold text-blue-600">
+                                    {
+                                        certificates[
+                                            activeIndex
+                                        ].issuer
+                                    }
                                 </span>
-                                <h3 className="mt-2 text-lg font-bold text-gray-900 transition-colors duration-300 sm:text-xl">
-                                    {item.title}
+                                <h3 className="mt-2 line-clamp-2 text-lg font-bold text-gray-900">
+                                    {
+                                        certificates[
+                                            activeIndex
+                                        ].title
+                                    }
                                 </h3>
-                                <div className="mt-6 flex items-center justify-between">
-                                    <span className="text-sm text-gray-500">
-                                        {item.year}
+                                <div className="mt-4 flex items-center justify-between">
+                                    <span className="text-xs text-gray-500">
+                                        {
+                                            certificates[
+                                                activeIndex
+                                            ].year
+                                        }
                                     </span>
-                                    <div className="flex items-center gap-2 rounded-full bg-blue-600 px-3 py-2 text-xs font-semibold text-white transition-all duration-300 group-hover:scale-105 group-hover:bg-blue-700 sm:px-4 sm:text-sm">
-                                        {t.certificate.view}
-                                        <ExternalLink size={15} />
-                                    </div>
+                                    <span className="flex items-center gap-1.5 rounded-full bg-blue-600 px-3 py-1.5 text-xs font-semibold text-white">
+                                        {
+                                            t
+                                                .certificate
+                                                .view
+                                        }
+                                        <ExternalLink
+                                            size={13}
+                                        />
+                                    </span>
                                 </div>
                             </div>
                         </motion.div>
-                    ))}
+                    </AnimatePresence>
+
+                    {/* RIGHT */}
+                    <button
+                        type="button"
+                        onClick={nextCertificate}
+                        aria-label="Next certificate"
+                        className="absolute right-0 z-[100] flex h-10 w-10 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-700 shadow-lg transition-all duration-300 hover:scale-110 hover:border-blue-500 hover:bg-blue-600 hover:text-white"
+                    >
+                        <ChevronRight size={19} />
+                    </button>
                 </div>
+                {total > 1 && (
+                    <div className="mt-6 flex items-center justify-center gap-2">
+                        {certificates.map(
+                            (_, index) => (
+                                <button
+                                    key={index}
+                                    type="button"
+                                    aria-label={`Go to certificate ${
+                                        index + 1
+                                    }`}
+                                    onClick={() =>
+                                        selectCertificate(
+                                            index
+                                        )
+                                    }
+                                    className={`
+                                        h-2 rounded-full transition-all duration-300
+                                        ${
+                                            index ===
+                                            activeIndex
+                                                ? "w-8 bg-blue-600"
+                                                : "w-2 bg-gray-300 hover:bg-blue-400"
+                                        }
+                                    `}
+                                />
+                            )
+                        )}
+                    </div>
+                )}
             </div>
 
-            {/* Modal */}
             {selectedCertificate && (
                 <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    onClick={() => setSelectedCertificate(null)}
+                    initial={{
+                        opacity: 0,
+                    }}
+                    animate={{
+                        opacity: 1,
+                    }}
+                    exit={{
+                        opacity: 0,
+                    }}
+                    onClick={() =>
+                        setSelectedCertificate(null)
+                    }
                     className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
                 >
                     <motion.div
@@ -125,24 +451,36 @@ export default function Certificates({
                         transition={{
                             duration: 0.25,
                         }}
-                        onClick={(e) => e.stopPropagation()}
+                        onClick={(e) =>
+                            e.stopPropagation()
+                        }
                         className="relative inline-block"
                     >
-                        {/* Close */}
-                        <div className="relative inline-block">
-                            <button
-                                onClick={() => setSelectedCertificate(null)}
-                                className="absolute -right-2 -top-2 z-50 flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-white shadow-lg transition hover:scale-110 hover:bg-blue-600 hover:text-white"
-                            >
-                                <X size={16} />
-                            </button>
-                            <div className="rounded-2xl bg-[#DAE3F1] p-2 sm:p-3 shadow-xl">
-                                <img
-                                    src={selectedCertificate.image}
-                                    alt={selectedCertificate.title}
-                                    className="block max-h-[55vh] max-w-[82vw] rounded-xl object-contain sm:max-h-[60vh] sm:max-w-[65vw] lg:max-h-[65vh] lg:max-w-[55vw]"
-                                />
-                            </div>
+                        {/* CLOSE */}
+                        <button
+                            type="button"
+                            onClick={() =>
+                                setSelectedCertificate(
+                                    null
+                                )
+                            }
+                            aria-label="Close certificate"
+                            className="absolute -right-2 -top-2 z-50 flex h-8 w-8 items-center justify-center rounded-full bg-white shadow-lg transition hover:scale-110 hover:bg-blue-600 hover:text-white sm:h-9 sm:w-9"
+                        >
+                            <X size={16} />
+                        </button>
+
+                        {/* CERTIFICATE */}
+                        <div className="rounded-2xl bg-[#DAE3F1] p-2 shadow-xl sm:p-3">
+                            <img
+                                src={
+                                    selectedCertificate.image
+                                }
+                                alt={
+                                    selectedCertificate.title
+                                }
+                                className="block max-h-[55vh] max-w-[82vw] rounded-xl object-contain sm:max-h-[60vh] sm:max-w-[65vw] lg:max-h-[65vh] lg:max-w-[55vw]"
+                            />
                         </div>
                     </motion.div>
                 </motion.div>

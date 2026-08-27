@@ -30,7 +30,6 @@ export default function About({ language }: AboutProps) {
                             <div className="flip-front">
                                 <img src="/images/hero2.webp" alt="" />
                             </div>
-
                             <div className="flip-back">
                                 <img src="/images/hero3.webp" alt="" />
                             </div>
@@ -62,6 +61,9 @@ export default function About({ language }: AboutProps) {
                                 <CountUp
                                     end={2}
                                     duration={2}
+                                    enableScrollSpy
+                                    scrollSpyOnce
+                                    scrollSpyDelay={200}
                                 />
                                 +
                             </h3>
@@ -74,6 +76,9 @@ export default function About({ language }: AboutProps) {
                                 <CountUp
                                     end={15}
                                     duration={2}
+                                    enableScrollSpy
+                                    scrollSpyOnce
+                                    scrollSpyDelay={200}
                                 />
                                 +
                             </h3>
@@ -81,11 +86,15 @@ export default function About({ language }: AboutProps) {
                                 {t.about.projects}
                             </p>
                         </div>
+
                         <div className="px-1">
                             <h3 className="text-3xl font-extrabold text-blue-600 sm:text-4xl">
                                 <CountUp
                                     end={20}
                                     duration={2}
+                                    enableScrollSpy
+                                    scrollSpyOnce
+                                    scrollSpyDelay={200}
                                 />
                                 +
                             </h3>
