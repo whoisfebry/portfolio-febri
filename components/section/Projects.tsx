@@ -84,7 +84,7 @@ export default function Projects({
                     <span className="text-sm font-semibold uppercase tracking-[0.25em] text-blue-600">
                         {t.project.title}
                     </span>
-                    <h2 className="mt-3 text-2xl font-extrabold text-gray-900 sm:text-4xl md:text-5xl">
+                    <h2 className="mt-3 text-3xl font-extrabold text-gray-900 sm:text-4xl md:text-5xl">
                         {t.project.heading}
                         <span className="bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
                             {" "}

@@ -50,13 +50,14 @@ export default function About({ language }: AboutProps) {
                     </span>
                     {/* Bio */}
                     <div className="mt-6 border-l-4 border-blue-600 pl-4 lg:mt-8 lg:pl-6">
-                        <TextReveal className="mx-auto max-w-xl text-[15px] leading-7 text-gray-600 sm:text-[16px] lg:mx-0 lg:text-[17px] lg:leading-8">
+                        <TextReveal className="mx-auto max-w-2xl text-[15px] leading-7 text-gray-600 sm:text-[16px] lg:mx-0 lg:text-[17px] lg:leading-8">
                             {t.about.description}
                         </TextReveal>
                     </div>
                     {/* Statistics */}
-                    <div className="mt-8 grid grid-cols-3 gap-3 border-y border-gray-200 py-6 text-center lg:mt-10 lg:gap-8">
-                        <div className="px-1">
+                    <div className="mt-8 grid grid-cols-3 gap-3 text-center lg:mt-10 lg:gap-5">
+                        {/* Experience */}
+                        <div className="rounded-2xl border border-blue-100 bg-blue-50/50 px-2 py-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-md sm:px-4 sm:py-6">
                             <h3 className="text-3xl font-extrabold text-blue-600 sm:text-4xl">
                                 <CountUp
                                     end={2}
@@ -71,7 +72,9 @@ export default function About({ language }: AboutProps) {
                                 {t.about.experience}
                             </p>
                         </div>
-                        <div className="px-1">
+
+                        {/* Projects */}
+                        <div className="rounded-2xl border border-blue-100 bg-blue-50/50 px-2 py-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-md sm:px-4 sm:py-6">
                             <h3 className="text-3xl font-extrabold text-blue-600 sm:text-4xl">
                                 <CountUp
                                     end={15}
@@ -87,7 +90,8 @@ export default function About({ language }: AboutProps) {
                             </p>
                         </div>
 
-                        <div className="px-1">
+                        {/* Technologies */}
+                        <div className="rounded-2xl border border-blue-100 bg-blue-50/50 px-2 py-5 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-md sm:px-4 sm:py-6">
                             <h3 className="text-3xl font-extrabold text-blue-600 sm:text-4xl">
                                 <CountUp
                                     end={20}

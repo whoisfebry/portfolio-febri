@@ -229,3 +229,25 @@ img {
         border-radius: 24px;
     }
 }
+
+.portfolio-page {
+    position: relative;
+    min-height: 100vh;
+    overflow-x: clip;
+}
+
+.shapegrid-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100dvh;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.portfolio-content {
+    position: relative;
+    z-index: 1;
+}

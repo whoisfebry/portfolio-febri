@@ -16,7 +16,7 @@ export default function Footer({
     const t = language === "ID" ? id : en;
 
     return (
-        <footer className="border-t border-gray-200 bg-gradient-to-b from-white to-blue-50/40">
+        <footer className="border-t border-gray-200 bg-transparent">
             <motion.div
                 initial={{
                     opacity: 0,
